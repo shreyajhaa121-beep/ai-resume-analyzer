@@ -2,7 +2,47 @@
 // AI RESUME ANALYZER - BETTER ATS ENGINE
 // ============================================
 
+// ============================================
+// PDF TEXT EXTRACTION
+// ============================================
 
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+async function extractPdfText(file) {
+
+    const arrayBuffer =
+        await file.arrayBuffer();
+
+    const pdf =
+        await pdfjsLib.getDocument({
+            data: new Uint8Array(arrayBuffer)
+        }).promise;
+
+    let text = "";
+
+    for (
+        let pageNumber = 1;
+        pageNumber <= pdf.numPages;
+        pageNumber++
+    ) {
+
+        const page =
+            await pdf.getPage(pageNumber);
+
+        const content =
+            await page.getTextContent();
+
+        const pageText =
+            content.items
+                .map(item => item.str)
+                .join(" ");
+
+        text += pageText + "\n";
+    }
+
+    return text;
+}
 // ============================================
 // 1. GET HTML ELEMENTS
 // ============================================
@@ -80,16 +120,38 @@ resumeFile.addEventListener(
 
         }
 
-        // PDF - extraction will be added later
-        else if (
-            file.type === "application/pdf" ||
-            file.name.toLowerCase().endsWith(".pdf")
-        ) {
+        // PDF files
+else if (
+    file.type === "application/pdf" ||
+    file.name.toLowerCase().endsWith(".pdf")
+) {
 
-            resumeText =
-                "PDF text extraction is not available yet.";
+    try {
+
+        resumeText =
+            await extractPdfText(file);
+
+        if (!resumeText.trim()) {
+
+            throw new Error(
+                "No selectable text found in PDF."
+            );
 
         }
+
+    } catch (error) {
+
+        console.error(error);
+
+        resumeText = "";
+
+        alert(
+            "Could not read this PDF. Please try a text-based PDF."
+        );
+
+    }
+
+}
 
         else {
 
@@ -432,18 +494,7 @@ function analyzeResume() {
 
 
     // PDF protection
-    if (
-        resumeText ===
-        "PDF text extraction is not available yet."
-    ) {
-
-        alert(
-            "PDF extraction will be added in the next version. Please use a TXT resume for now."
-        );
-
-        return;
-
-    }
+    
 
 
     const resumeLower =
