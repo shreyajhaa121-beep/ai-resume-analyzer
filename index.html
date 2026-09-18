@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Analyzer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <div class="logo">
+            ResumeAI
+        </div>
+
+        <a href="#analyzer" class="nav-button">
+            Analyze Resume
+        </a>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="badge">
+                AI-Powered Resume Analysis
+            </span>
+
+            <h1>
+                Make Your Resume
+                <span>ATS Ready</span>
+            </h1>
+
+            <p>
+                Analyze your resume, compare it with a job
+                description and discover important keywords.
+            </p>
+
+            <a href="#analyzer" class="primary-button">
+                Start Analysis
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- Analyzer Section -->
+    <section id="analyzer"
+             class="analyzer-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Resume Analyzer
+            </h2>
+
+            <p>
+                Upload your resume and paste the job description.
+            </p>
+
+        </div>
+
+
+        <div class="analyzer-grid">
+
+
+            <!-- Resume Upload -->
+            <div class="card">
+
+                <h3>
+                    1. Upload Resume
+                </h3>
+
+                <p class="card-description">
+                    Upload your resume file.
+                </p>
+
+
+                <label for="resumeFile"
+                       class="upload-box">
+
+                    <div class="upload-icon">
+                        📄
+                    </div>
+
+                    <strong>
+                        Choose Resume
+                    </strong>
+
+                    <span>
+                        PDF or TXT
+                    </span>
+
+                </label>
+
+
+                <input
+                    type="file"
+                    id="resumeFile"
+                    accept=".txt,.pdf"
+                >
+
+
+                <div id="fileName"
+                     class="file-name">
+
+                    No file selected
+
+                </div>
+
+            </div>
+
+
+            <!-- Job Description -->
+            <div class="card">
+
+                <h3>
+                    2. Job Description
+                </h3>
+
+                <p class="card-description">
+                    Paste the job description here.
+                </p>
+
+
+                <textarea
+                    id="jobDescription"
+                    placeholder="Paste the job description here..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <!-- Analyze Button -->
+        <div class="analyze-container">
+
+            <button
+                id="analyzeBtn"
+                class="analyze-button">
+
+                Analyze Resume
+
+            </button>
+
+        </div>
+
+
+        <!-- Results Section -->
+        <div id="results"
+             class="results hidden">
+
+            <h2>
+                Analysis Results
+            </h2>
+
+
+            <!-- ATS Score -->
+            <div class="score-card">
+
+                <div class="score-circle">
+
+                    <span id="score">
+                        0
+                    </span>
+
+                    <small>
+                        / 100
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        ATS Compatibility
+                    </h3>
+
+                    <p id="scoreMessage">
+                        Your score will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Keywords -->
+            <div class="result-grid">
+
+
+                <div class="result-card">
+
+                    <h3>
+                        Matched Keywords
+                    </h3>
+
+                    <div id="matchedKeywords"
+                         class="keyword-list">
+                    </div>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <h3>
+                        Missing Keywords
+                    </h3>
+
+                    <div id="missingKeywords"
+                         class="keyword-list">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Suggestions -->
+            <div class="suggestions-card">
+
+                <h3>
+                    Resume Suggestions
+                </h3>
+
+                <ul id="suggestions">
+                </ul>
+
+            </div>
+
+
+            <!-- Bullet Improvement -->
+            <div class="bullet-card">
+
+                <h3>
+                    Improve a Resume Bullet
+                </h3>
+
+
+                <textarea
+                    id="bulletInput"
+                    placeholder="Example: Worked on a college website">
+                </textarea>
+
+
+                <button
+                    id="improveBulletBtn"
+                    class="secondary-button">
+
+                    Improve Bullet
+
+                </button>
+
+
+                <div id="improvedBullet"
+                     class="improved-bullet">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            AI Resume Analyzer
+            • Built with HTML, CSS & JavaScript
+        </p>
+
+    </footer>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
