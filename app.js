@@ -334,7 +334,28 @@ function extractKeywords(text) {
         "basic",
         "experience",
         "requirements",
-        "responsibilities"
+        "responsibilities",
+"knowledge",
+"understanding",
+"improve",
+"improvement",
+"applications",
+"application",
+"technical",
+"skills",
+"ability",
+"work",
+"using",
+"develop",
+"developing",
+"build",
+"building",
+"maintain",
+"maintaining",
+"features",
+"issues",
+"users",
+"user"
 
     ]);
 
