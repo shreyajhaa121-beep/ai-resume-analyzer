@@ -13,7 +13,7 @@ async function extractPdfText(file) {
 
     const arrayBuffer =
         await file.arrayBuffer();
-
+    
     const pdf =
         await pdfjsLib.getDocument({
             data: new Uint8Array(arrayBuffer)
