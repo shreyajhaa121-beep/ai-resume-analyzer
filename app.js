@@ -495,11 +495,10 @@ function displayKeywords(
 // 9. CHECK RESUME SECTIONS
 // ============================================
 
-function checkResumeSections() {
+ function checkResumeSections() {
 
     const text =
         normalizeText(resumeText);
-
 
     return {
 
@@ -528,7 +527,29 @@ function checkResumeSections() {
 
     };
 
-}
+ }
+
+// ----------------------------------------
+// Resume Quality Check
+// ----------------------------------------
+
+contactCheck.textContent =
+    sections.contact ? "✓ Present" : "✗ Missing";
+
+summaryCheck.textContent =
+    sections.summary ? "✓ Present" : "✗ Missing";
+
+skillsCheck.textContent =
+    sections.skills ? "✓ Present" : "✗ Missing";
+
+projectsCheck.textContent =
+    sections.projects ? "✓ Present" : "✗ Missing";
+
+experienceCheck.textContent =
+    sections.experience ? "✓ Present" : "✗ Missing";
+
+educationCheck.textContent =
+    sections.education ? "✓ Present" : "✗ Missing";
 
 
 // ============================================
