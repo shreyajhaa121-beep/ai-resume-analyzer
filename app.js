@@ -896,6 +896,18 @@ function analyzeResume() {
 
     const resumeLower =
         normalizeText(resumeText);
+    
+    // ========================================
+// ADVANCED ATS CATEGORY SCORES
+// ========================================
+
+const categoryScores =
+    calculateCategoryScores(resumeText);
+
+console.log(
+    "ATS Category Scores:",
+    categoryScores
+);
 
 
     // ----------------------------------------
