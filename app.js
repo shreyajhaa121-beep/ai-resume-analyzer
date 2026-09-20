@@ -385,6 +385,69 @@ resumeFile.addEventListener(
 
 
 // ============================================
+// ADVANCED ATS SKILL CATEGORIES
+// ============================================
+
+const atsSkillCategories = {
+
+    programming: [
+        "c",
+        "c++",
+        "java",
+        "python",
+        "javascript",
+        "typescript"
+    ],
+
+    web: [
+        "html",
+        "html5",
+        "css",
+        "css3",
+        "react",
+        "node.js",
+        "nodejs",
+        "responsive web design",
+        "responsive design"
+    ],
+
+    database: [
+        "sql",
+        "mysql",
+        "mongodb",
+        "database",
+        "data management"
+    ],
+
+    tools: [
+        "git",
+        "github",
+        "docker",
+        "github pages"
+    ],
+
+    concepts: [
+        "api",
+        "rest api",
+        "dom manipulation",
+        "localstorage",
+        "debugging",
+        "problem solving",
+        "frontend development",
+        "backend development",
+        "web application development"
+    ],
+
+    softSkills: [
+        "communication",
+        "teamwork",
+        "leadership",
+        "adaptability"
+    ]
+};
+
+
+// ============================================
 // 3. KNOWN TECHNICAL SKILLS
 // ============================================
 
