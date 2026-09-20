@@ -1653,6 +1653,18 @@ function improveBulletRuleBased(
 
         result += ".";
     }
+        // Add measurable impact when a number is detected
+    const hasMetric =
+        /\b\d+(\.\d+)?%?\b/.test(result);
+
+    if (!hasMetric) {
+
+        result =
+            result.replace(
+                /\.$/,
+                " with a focus on performance and usability."
+            );
+    }
 
     return result;
 }
