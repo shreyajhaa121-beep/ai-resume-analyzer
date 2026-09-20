@@ -266,39 +266,60 @@ resumeFile.addEventListener(
         // ========================================
 
         else if (
-            file.type === "application/pdf" ||
-            file.name.toLowerCase().endsWith(".pdf")
-        ) {
+    file.type === "application/pdf" ||
+    file.name.toLowerCase().endsWith(".pdf")
+) {
 
-            try {
+    try {
 
-                resumeText =
-                    await extractPdfText(file);
+        // First try normal PDF text extraction
+        resumeText =
+            await extractPdfText(file);
 
-                // If PDF has no selectable text,
-                // try OCR on the PDF pages later.
+        // If selectable text exists,
+        // use it directly.
+        if (resumeText.trim()) {
 
-                if (!resumeText.trim()) {
+            console.log(
+                "PDF text extracted successfully."
+            );
 
-                    throw new Error(
-                        "No selectable text found in PDF."
-                    );
+        }
 
-                }
+        // If no selectable text exists,
+        // use OCR fallback.
+        else {
 
-            }
+            console.log(
+                "No selectable text found. Starting OCR..."
+            );
 
-            catch (error) {
+            resumeText =
+                await extractScannedPdfText(file);
 
-                console.error(error);
+        }
 
-                resumeText = "";
+        if (!resumeText.trim()) {
 
-                alert(
-                    "This PDF does not contain selectable text yet. OCR support for scanned PDFs will be connected in the next step."
-                );
+            throw new Error(
+                "No text could be extracted from PDF."
+            );
 
-            }
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        resumeText = "";
+
+        alert(
+            "Could not read this PDF. Please try another PDF."
+        );
+
+    }
 
         }
 
