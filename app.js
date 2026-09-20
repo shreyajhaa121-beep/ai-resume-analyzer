@@ -68,6 +68,18 @@ const score =
 const scoreMessage =
     document.getElementById("scoreMessage");
 
+const skillsScore =
+    document.getElementById("skillsScore");
+
+const keywordsScore =
+    document.getElementById("keywordsScore");
+
+const sectionsScore =
+    document.getElementById("sectionsScore");
+
+const overallScore =
+    document.getElementById("overallScore");
+
 const matchedKeywords =
     document.getElementById("matchedKeywords");
 
@@ -671,6 +683,19 @@ function analyzeResume() {
 
     score.textContent =
         percentage;
+    // Display ATS score breakdown
+
+skillsScore.textContent =
+    Math.round(skillScore) + "/60";
+
+keywordsScore.textContent =
+    Math.round(keywordScore) + "/25";
+
+sectionsScore.textContent =
+    sectionScore + "/10";
+
+overallScore.textContent =
+    percentage + "/100";
 
 
     if (percentage >= 80) {
