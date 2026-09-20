@@ -299,7 +299,6 @@ function extractSkills(text) {
 // ============================================
 // 7. EXTRACT IMPORTANT GENERAL KEYWORDS
 // ============================================
-
 function extractKeywords(text) {
 
     const stopWords = new Set([
@@ -335,34 +334,35 @@ function extractKeywords(text) {
         "experience",
         "requirements",
         "responsibilities",
-"knowledge",
-"understanding",
-"improve",
-"improvement",
-"applications",
-"application",
-"technical",
-"skills",
-"ability",
-"work",
-"using",
-"develop",
-"developing",
-"build",
-"building",
-"maintain",
-"maintaining",
-"features",
-"issues",
-"users",
-"user"
+        "knowledge",
+        "understanding",
+        "improve",
+        "improvement",
+        "applications",
+        "application",
+        "technical",
+        "skills",
+        "ability",
+        "develop",
+        "developing",
+        "build",
+        "building",
+        "maintain",
+        "maintaining",
+        "features",
+        "issues",
+        "users",
+        "user"
 
     ]);
 
 
     const words = normalizeText(text)
-        .replace(/[^a-z0-9+#.]/g, " ")
+        .replace(/[^a-z0-9+#.\s]/g, " ")
         .split(/\s+/)
+        .map(word =>
+            word.replace(/^[.,;:!?()[\]{}]+|[.,;:!?()[\]{}]+$/g, "")
+        )
         .filter(word =>
             word.length >= 4 &&
             !stopWords.has(word)
