@@ -69,6 +69,88 @@ const server = http.createServer(
 
             return;
         }
+                if (
+            req.method === "POST" &&
+            req.url === "/analyze"
+        ) {
+
+            let body = "";
+
+            req.on(
+                "data",
+                chunk => {
+                    body += chunk;
+                }
+            );
+
+            req.on(
+                "end",
+                async () => {
+
+                    try {
+
+                        const data =
+                            JSON.parse(body);
+
+                        const resume =
+                            data.resume || "";
+
+                        const jobDescription =
+                            data.jobDescription || "";
+
+                        if (
+                            !resume ||
+                            !jobDescription
+                        ) {
+
+                            res.statusCode = 400;
+
+                            res.end(
+                                JSON.stringify({
+                                    error:
+                                        "Resume and job description are required."
+                                })
+                            );
+
+                            return;
+                        }
+
+                        const result =
+                            await analyzeWithAI(
+                                resume,
+                                jobDescription
+                            );
+
+                        res.statusCode = 200;
+
+                        res.end(
+                            JSON.stringify({
+                                success: true,
+                                result: result
+                            })
+                        );
+
+                    } catch (error) {
+
+                        console.error(
+                            "AI analysis error:",
+                            error
+                        );
+
+                        res.statusCode = 500;
+
+                        res.end(
+                            JSON.stringify({
+                                error:
+                                    "AI analysis failed."
+                            })
+                        );
+                    }
+                }
+            );
+
+            return;
+                }
 
         res.statusCode = 404;
 
