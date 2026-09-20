@@ -2,14 +2,12 @@
 // AI RESUME ANALYZER - BETTER ATS ENGINE
 // ============================================
 
-
 // ============================================
-// 1. PDF TEXT EXTRACTION
+// PDF TEXT EXTRACTION
 // ============================================
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
 
 async function extractPdfText(file) {
 
@@ -48,7 +46,7 @@ async function extractPdfText(file) {
 
 
 // ============================================
-// 2. GET HTML ELEMENTS
+// 1. GET HTML ELEMENTS
 // ============================================
 
 const resumeFile =
@@ -106,42 +104,19 @@ const downloadReportBtn =
     document.getElementById("downloadReportBtn");
 
 
-// Resume Quality Check elements
-
-const contactCheck =
-    document.getElementById("contactCheck");
-
-const summaryCheck =
-    document.getElementById("summaryCheck");
-
-const skillsCheck =
-    document.getElementById("skillsCheck");
-
-const projectsCheck =
-    document.getElementById("projectsCheck");
-
-const experienceCheck =
-    document.getElementById("experienceCheck");
-
-const educationCheck =
-    document.getElementById("educationCheck");
-
-
 // Store resume text
-
 let resumeText = "";
 
 
 // ============================================
-// 3. RESUME FILE SELECTION
+// 2. RESUME FILE SELECTION
 // ============================================
 
 resumeFile.addEventListener(
     "change",
     async function () {
 
-        const file =
-            this.files[0];
+        const file = this.files[0];
 
         if (!file) {
             return;
@@ -151,15 +126,10 @@ resumeFile.addEventListener(
             file.name;
 
 
-        // ----------------------------------------
-        // TXT FILE
-        // ----------------------------------------
-
+        // TXT files
         if (
             file.type === "text/plain" ||
-            file.name
-                .toLowerCase()
-                .endsWith(".txt")
+            file.name.toLowerCase().endsWith(".txt")
         ) {
 
             resumeText =
@@ -168,15 +138,10 @@ resumeFile.addEventListener(
         }
 
 
-        // ----------------------------------------
-        // PDF FILE
-        // ----------------------------------------
-
+        // PDF files
         else if (
             file.type === "application/pdf" ||
-            file.name
-                .toLowerCase()
-                .endsWith(".pdf")
+            file.name.toLowerCase().endsWith(".pdf")
         ) {
 
             try {
@@ -209,10 +174,7 @@ resumeFile.addEventListener(
         }
 
 
-        // ----------------------------------------
-        // INVALID FILE
-        // ----------------------------------------
-
+        // Unsupported file
         else {
 
             resumeText = "";
@@ -228,7 +190,7 @@ resumeFile.addEventListener(
 
 
 // ============================================
-// 4. KNOWN TECHNICAL SKILLS
+// 3. KNOWN TECHNICAL SKILLS
 // ============================================
 
 const technicalSkills = [
@@ -281,12 +243,11 @@ const technicalSkills = [
 
     "communication",
     "teamwork"
-
 ];
 
 
 // ============================================
-// 5. NORMALIZE TEXT
+// 4. NORMALIZE TEXT
 // ============================================
 
 function normalizeText(text) {
@@ -301,7 +262,7 @@ function normalizeText(text) {
 
 
 // ============================================
-// 6. CHECK WHETHER A TERM EXISTS
+// 5. SMART TERM MATCHING
 // ============================================
 
 function containsTerm(text, term) {
@@ -312,36 +273,23 @@ function containsTerm(text, term) {
     const normalizedTerm =
         normalizeText(term);
 
-
     // Exact match
-
     if (
         normalizedText.includes(
             normalizedTerm
         )
     ) {
-
         return true;
-
     }
 
-
     // Simple word variations
-
     const variations = [
-
         normalizedTerm,
-
         normalizedTerm + "s",
-
         normalizedTerm + "es",
-
         normalizedTerm + "ed",
-
         normalizedTerm + "ing"
-
     ];
-
 
     return variations.some(
         variation =>
@@ -354,40 +302,34 @@ function containsTerm(text, term) {
 
 
 // ============================================
-// 7. EXTRACT IMPORTANT SKILLS
+// 6. EXTRACT IMPORTANT SKILLS
 // ============================================
 
 function extractSkills(text) {
 
     const foundSkills = [];
 
+    technicalSkills.forEach(skill => {
 
-    technicalSkills.forEach(
-        skill => {
+        if (
+            containsTerm(text, skill)
+        ) {
 
+            // Avoid duplicate entries
             if (
-                containsTerm(
-                    text,
-                    skill
+                !foundSkills.some(
+                    item =>
+                        item === skill
                 )
             ) {
 
-                if (
-                    !foundSkills.some(
-                        item =>
-                            item === skill
-                    )
-                ) {
-
-                    foundSkills.push(skill);
-
-                }
+                foundSkills.push(skill);
 
             }
 
         }
-    );
 
+    });
 
     return foundSkills;
 
@@ -395,66 +337,65 @@ function extractSkills(text) {
 
 
 // ============================================
-// 8. EXTRACT GENERAL KEYWORDS
+// 7. EXTRACT IMPORTANT GENERAL KEYWORDS
 // ============================================
 
 function extractKeywords(text) {
 
-    const stopWords =
-        new Set([
+    const stopWords = new Set([
 
-            "the",
-            "and",
-            "for",
-            "with",
-            "that",
-            "this",
-            "from",
-            "your",
-            "you",
-            "are",
-            "have",
-            "has",
-            "will",
-            "our",
-            "their",
-            "into",
-            "about",
-            "using",
-            "work",
-            "working",
-            "job",
-            "role",
-            "years",
-            "looking",
-            "help",
-            "helping",
-            "good",
-            "basic",
-            "experience",
-            "requirements",
-            "responsibilities",
-            "knowledge",
-            "understanding",
-            "improve",
-            "improvement",
-            "applications",
-            "application",
-            "technical",
-            "skills",
-            "ability",
-            "develop",
-            "developing",
-            "build",
-            "building",
-            "maintain",
-            "maintaining",
-            "features",
-            "issues",
-            "users",
-            "user"
+        "the",
+        "and",
+        "for",
+        "with",
+        "that",
+        "this",
+        "from",
+        "your",
+        "you",
+        "are",
+        "have",
+        "has",
+        "will",
+        "our",
+        "their",
+        "into",
+        "about",
+        "using",
+        "work",
+        "working",
+        "job",
+        "role",
+        "years",
+        "looking",
+        "help",
+        "helping",
+        "good",
+        "basic",
+        "experience",
+        "requirements",
+        "responsibilities",
+        "knowledge",
+        "understanding",
+        "improve",
+        "improvement",
+        "applications",
+        "application",
+        "technical",
+        "skills",
+        "ability",
+        "develop",
+        "developing",
+        "build",
+        "building",
+        "maintain",
+        "maintaining",
+        "features",
+        "issues",
+        "users",
+        "user"
 
-        ]);
+    ]);
 
 
     const words =
@@ -464,49 +405,43 @@ function extractKeywords(text) {
                 " "
             )
             .split(/\s+/)
-            .map(
-                word =>
-                    word.replace(
-                        /^[.,;:!?()[\]{}]+|[.,;:!?()[\]{}]+$/g,
-                        ""
-                    )
+            .map(word =>
+                word.replace(
+                    /^[.,;:!?()[\]{}]+|[.,;:!?()[\]{}]+$/g,
+                    ""
+                )
             )
-            .filter(
-                word =>
-                    word.length >= 4 &&
-                    !stopWords.has(word)
+            .filter(word =>
+                word.length >= 4 &&
+                !stopWords.has(word)
             );
 
 
     const frequency = {};
 
 
-    words.forEach(
-        word => {
+    words.forEach(word => {
 
-            frequency[word] =
-                (frequency[word] || 0) + 1;
+        frequency[word] =
+            (frequency[word] || 0) + 1;
 
-        }
-    );
+    });
 
 
     return Object.entries(frequency)
-        .sort(
-            (a, b) =>
-                b[1] - a[1]
+        .sort((a, b) =>
+            b[1] - a[1]
         )
         .slice(0, 15)
-        .map(
-            item =>
-                item[0]
+        .map(item =>
+            item[0]
         );
 
 }
 
 
 // ============================================
-// 9. DISPLAY KEYWORDS
+// 8. DISPLAY KEYWORDS
 // ============================================
 
 function displayKeywords(
@@ -516,15 +451,10 @@ function displayKeywords(
 
     container.innerHTML = "";
 
-
-    if (
-        keywords.length === 0
-    ) {
+    if (keywords.length === 0) {
 
         const span =
-            document.createElement(
-                "span"
-            );
+            document.createElement("span");
 
         span.textContent =
             "None";
@@ -532,97 +462,65 @@ function displayKeywords(
         span.className =
             "keyword";
 
-        container.appendChild(
-            span
-        );
+        container.appendChild(span);
 
         return;
 
     }
 
 
-    keywords.forEach(
-        keyword => {
+    keywords.forEach(keyword => {
 
-            const span =
-                document.createElement(
-                    "span"
-                );
+        const span =
+            document.createElement("span");
 
-            span.className =
-                "keyword";
+        span.className =
+            "keyword";
 
-            span.textContent =
-                keyword;
+        span.textContent =
+            keyword;
 
-            container.appendChild(
-                span
-            );
+        container.appendChild(span);
 
-        }
-    );
+    });
 
 }
 
 
 // ============================================
-// 10. CHECK RESUME SECTIONS
+// 9. CHECK RESUME SECTIONS
 // ============================================
 
 function checkResumeSections() {
 
     const text =
-        normalizeText(
-            resumeText
-        );
+        normalizeText(resumeText);
 
 
     return {
 
         summary:
-            text.includes(
-                "professional summary"
-            ) ||
-            text.includes(
-                "summary"
-            ),
+            text.includes("professional summary") ||
+            text.includes("summary"),
 
         skills:
-            text.includes(
-                "technical skills"
-            ) ||
-            text.includes(
-                "skills"
-            ),
+            text.includes("technical skills") ||
+            text.includes("skills"),
 
         projects:
-            text.includes(
-                "projects"
-            ),
+            text.includes("projects"),
 
         experience:
-            text.includes(
-                "experience"
-            ) ||
-            text.includes(
-                "intern"
-            ),
+            text.includes("experience") ||
+            text.includes("intern"),
 
         education:
-            text.includes(
-                "education"
-            ),
+            text.includes("education"),
 
         contact:
-            text.includes(
-                "linkedin"
-            ) ||
-            text.includes(
-                "github"
-            ) ||
-            text.includes(
-                "@"
-            )
+            text.includes("linkedin") ||
+            text.includes("github") ||
+            text.includes("@")
 
     };
 
@@ -630,23 +528,16 @@ function checkResumeSections() {
 
 
 // ============================================
-// 11. ANALYZE RESUME
+// 10. ANALYZE RESUME
 // ============================================
 
 function analyzeResume() {
-
-    // ----------------------------------------
-    // Job description
-    // ----------------------------------------
 
     const jobText =
         jobDescription.value.trim();
 
 
-    // ----------------------------------------
     // Check resume
-    // ----------------------------------------
-
     if (!resumeText) {
 
         alert(
@@ -658,10 +549,7 @@ function analyzeResume() {
     }
 
 
-    // ----------------------------------------
     // Check job description
-    // ----------------------------------------
-
     if (!jobText) {
 
         alert(
@@ -673,25 +561,8 @@ function analyzeResume() {
     }
 
 
-    // ----------------------------------------
-    // Check resume text
-    // ----------------------------------------
-
-    if (!resumeText.trim()) {
-
-        alert(
-            "Could not read the resume text."
-        );
-
-        return;
-
-    }
-
-
     const resumeLower =
-        normalizeText(
-            resumeText
-        );
+        normalizeText(resumeText);
 
 
     // ----------------------------------------
@@ -699,42 +570,33 @@ function analyzeResume() {
     // ----------------------------------------
 
     const jobSkills =
-        extractSkills(
-            jobText
-        );
-
+        extractSkills(jobText);
 
     const matchedSkills = [];
 
     const missingSkills = [];
 
 
-    jobSkills.forEach(
-        skill => {
+    jobSkills.forEach(skill => {
 
-            if (
-                containsTerm(
-                    resumeLower,
-                    skill
-                )
-            ) {
+        if (
+            containsTerm(
+                resumeLower,
+                skill
+            )
+        ) {
 
-                matchedSkills.push(
-                    skill
-                );
-
-            }
-
-            else {
-
-                missingSkills.push(
-                    skill
-                );
-
-            }
+            matchedSkills.push(skill);
 
         }
-    );
+
+        else {
+
+            missingSkills.push(skill);
+
+        }
+
+    });
 
 
     // ----------------------------------------
@@ -742,42 +604,33 @@ function analyzeResume() {
     // ----------------------------------------
 
     const generalKeywords =
-        extractKeywords(
-            jobText
-        );
-
+        extractKeywords(jobText);
 
     const matchedGeneral = [];
 
     const missingGeneral = [];
 
 
-    generalKeywords.forEach(
-        keyword => {
+    generalKeywords.forEach(keyword => {
 
-            if (
-                containsTerm(
-                    resumeLower,
-                    keyword
-                )
-            ) {
+        if (
+            containsTerm(
+                resumeLower,
+                keyword
+            )
+        ) {
 
-                matchedGeneral.push(
-                    keyword
-                );
-
-            }
-
-            else {
-
-                missingGeneral.push(
-                    keyword
-                );
-
-            }
+            matchedGeneral.push(keyword);
 
         }
-    );
+
+        else {
+
+            missingGeneral.push(keyword);
+
+        }
+
+    });
 
 
     // ----------------------------------------
@@ -791,9 +644,7 @@ function analyzeResume() {
     let sectionScore = 0;
 
 
-    if (
-        jobSkills.length > 0
-    ) {
+    if (jobSkills.length > 0) {
 
         skillScore =
             (
@@ -804,9 +655,7 @@ function analyzeResume() {
     }
 
 
-    if (
-        generalKeywords.length > 0
-    ) {
+    if (generalKeywords.length > 0) {
 
         keywordScore =
             (
@@ -817,88 +666,22 @@ function analyzeResume() {
     }
 
 
-    // ----------------------------------------
-    // Check resume sections
-    // ----------------------------------------
-
     const sections =
         checkResumeSections();
 
 
-    // ----------------------------------------
-    // Resume Quality Check
-    // ----------------------------------------
-
-    contactCheck.textContent =
-        sections.contact
-            ? "✓ Present"
-            : "✗ Missing";
-
-
-    summaryCheck.textContent =
-        sections.summary
-            ? "✓ Present"
-            : "✗ Missing";
-
-
-    skillsCheck.textContent =
-        sections.skills
-            ? "✓ Present"
-            : "✗ Missing";
-
-
-    projectsCheck.textContent =
-        sections.projects
-            ? "✓ Present"
-            : "✗ Missing";
-
-
-    experienceCheck.textContent =
-        sections.experience
-            ? "✓ Present"
-            : "✗ Missing";
-
-
-    educationCheck.textContent =
-        sections.education
-            ? "✓ Present"
-            : "✗ Missing";
-
-
-    // ----------------------------------------
-    // Section score
-    // ----------------------------------------
-
-    if (
-        sections.summary
-    ) {
-
+    if (sections.summary) {
         sectionScore += 3;
-
     }
 
-
-    if (
-        sections.skills
-    ) {
-
+    if (sections.skills) {
         sectionScore += 3;
-
     }
 
-
-    if (
-        sections.projects
-    ) {
-
+    if (sections.projects) {
         sectionScore += 4;
-
     }
 
-
-    // ----------------------------------------
-    // Calculate final percentage
-    // ----------------------------------------
 
     let percentage =
         Math.round(
@@ -909,7 +692,6 @@ function analyzeResume() {
 
 
     // Keep score between 0 and 100
-
     percentage =
         Math.max(
             0,
@@ -933,20 +715,13 @@ function analyzeResume() {
     // ----------------------------------------
 
     skillsScore.textContent =
-        Math.round(
-            skillScore
-        ) + "/60";
-
+        Math.round(skillScore) + "/60";
 
     keywordsScore.textContent =
-        Math.round(
-            keywordScore
-        ) + "/25";
-
+        Math.round(keywordScore) + "/25";
 
     sectionsScore.textContent =
         sectionScore + "/10";
-
 
     overallScore.textContent =
         percentage + "/100";
@@ -956,18 +731,14 @@ function analyzeResume() {
     // Score message
     // ----------------------------------------
 
-    if (
-        percentage >= 80
-    ) {
+    if (percentage >= 80) {
 
         scoreMessage.textContent =
             "Strong alignment with the job description.";
 
     }
 
-    else if (
-        percentage >= 60
-    ) {
+    else if (percentage >= 60) {
 
         scoreMessage.textContent =
             "Good alignment, with some areas to improve.";
@@ -983,7 +754,7 @@ function analyzeResume() {
 
 
     // ----------------------------------------
-    // Display matched keywords
+    // Display matched skills + keywords
     // ----------------------------------------
 
     const matched =
@@ -996,10 +767,6 @@ function analyzeResume() {
             )
         ].slice(0, 20);
 
-
-    // ----------------------------------------
-    // Display missing keywords
-    // ----------------------------------------
 
     const missing =
         [
@@ -1036,10 +803,7 @@ function analyzeResume() {
     );
 
 
-    // ----------------------------------------
     // Show results
-    // ----------------------------------------
-
     results.classList.remove(
         "hidden"
     );
@@ -1053,7 +817,7 @@ function analyzeResume() {
 
 
 // ============================================
-// 12. GENERATE SMART SUGGESTIONS
+// 11. GENERATE SMARTER SUGGESTIONS
 // ============================================
 
 function generateSuggestions(
@@ -1065,17 +829,11 @@ function generateSuggestions(
 
     suggestions.innerHTML = "";
 
-
     const suggestionList = [];
 
 
-    // ----------------------------------------
     // Score suggestion
-    // ----------------------------------------
-
-    if (
-        percentage < 60
-    ) {
+    if (percentage < 60) {
 
         suggestionList.push(
             "Review the job description and strengthen the skills that genuinely match your experience."
@@ -1083,9 +841,7 @@ function generateSuggestions(
 
     }
 
-    else if (
-        percentage < 80
-    ) {
+    else if (percentage < 80) {
 
         suggestionList.push(
             "Improve alignment by adding relevant skills and evidence from your actual experience."
@@ -1102,32 +858,22 @@ function generateSuggestions(
     }
 
 
-    ----------------------------------------
     // Missing technical skills
-    // ----------------------------------------
-
     if (
         missingSkills.length > 0
     ) {
 
         suggestionList.push(
             "Consider adding these technical skills only if you genuinely have experience with them: " +
-            missingSkills
-                .slice(0, 5)
-                .join(", ") +
+            missingSkills.slice(0, 5).join(", ") +
             "."
         );
 
     }
 
 
-    // ----------------------------------------
     // Projects
-    // ----------------------------------------
-
-    if (
-        !sections.projects
-    ) {
+    if (!sections.projects) {
 
         suggestionList.push(
             "Consider adding a Projects section with technologies, responsibilities and measurable results."
@@ -1136,13 +882,8 @@ function generateSuggestions(
     }
 
 
-    // ----------------------------------------
     // Experience
-    // ----------------------------------------
-
-    if (
-        !sections.experience
-    ) {
+    if (!sections.experience) {
 
         suggestionList.push(
             "Add relevant internship, training or practical experience if applicable."
@@ -1151,13 +892,8 @@ function generateSuggestions(
     }
 
 
-    // ----------------------------------------
     // Skills
-    // ----------------------------------------
-
-    if (
-        !sections.skills
-    ) {
+    if (!sections.skills) {
 
         suggestionList.push(
             "Add a clearly organized Technical Skills section."
@@ -1166,10 +902,7 @@ function generateSuggestions(
     }
 
 
-    // ----------------------------------------
     // General improvement
-    // ----------------------------------------
-
     suggestionList.push(
         "Use clear action verbs such as developed, implemented, designed, analyzed and optimized."
     );
@@ -1180,24 +913,17 @@ function generateSuggestions(
     );
 
 
-    // ----------------------------------------
     // Display suggestions
-    // ----------------------------------------
-
     suggestionList.forEach(
         suggestion => {
 
             const li =
-                document.createElement(
-                    "li"
-                );
+                document.createElement("li");
 
             li.textContent =
                 suggestion;
 
-            suggestions.appendChild(
-                li
-            );
+            suggestions.appendChild(li);
 
         }
     );
@@ -1206,7 +932,7 @@ function generateSuggestions(
 
 
 // ============================================
-// 13. ANALYZE BUTTON
+// 12. ANALYZE BUTTON
 // ============================================
 
 analyzeBtn.addEventListener(
@@ -1216,7 +942,7 @@ analyzeBtn.addEventListener(
 
 
 // ============================================
-// 14. BULLET IMPROVEMENT
+// 13. BULLET IMPROVEMENT
 // ============================================
 
 improveBulletBtn.addEventListener(
@@ -1252,7 +978,7 @@ improveBulletBtn.addEventListener(
 
 
 // ============================================
-// 15. RULE-BASED BULLET IMPROVEMENT
+// 14. RULE-BASED BULLET IMPROVEMENT
 // ============================================
 
 function improveBulletRuleBased(
@@ -1295,10 +1021,8 @@ function improveBulletRuleBased(
     };
 
 
-    Object.keys(
-        replacements
-    ).forEach(
-        oldPhrase => {
+    Object.keys(replacements)
+        .forEach(oldPhrase => {
 
             const regex =
                 new RegExp(
@@ -1310,13 +1034,10 @@ function improveBulletRuleBased(
             result =
                 result.replace(
                     regex,
-                    replacements[
-                        oldPhrase
-                    ]
+                    replacements[oldPhrase]
                 );
 
-        }
-    );
+        });
 
 
     return result;
@@ -1325,7 +1046,7 @@ function improveBulletRuleBased(
 
 
 // ============================================
-// 16. DOWNLOAD ATS REPORT
+// 15. DOWNLOAD ATS REPORT
 // ============================================
 
 downloadReportBtn.addEventListener(
@@ -1333,12 +1054,10 @@ downloadReportBtn.addEventListener(
     function () {
 
         const today =
-            new Date()
-                .toLocaleDateString();
+            new Date().toLocaleDateString();
 
 
         const report = `
-
 ========================================
         AI RESUME ANALYZER
         ATS COMPATIBILITY REPORT
@@ -1401,7 +1120,6 @@ ${suggestions.innerText || "None"}
 ========================================
 
 Generated by AI Resume Analyzer
-
 `;
 
 
@@ -1416,15 +1134,11 @@ Generated by AI Resume Analyzer
 
 
         const url =
-            window.URL.createObjectURL(
-                blob
-            );
+            window.URL.createObjectURL(blob);
 
 
         const link =
-            document.createElement(
-                "a"
-            );
+            document.createElement("a");
 
 
         link.href =
@@ -1435,13 +1149,15 @@ Generated by AI Resume Analyzer
             "ATS-Resume-Analysis-Report.txt";
 
 
+        link.textContent =
+            "Download ATS Report";
+
+
         link.style.display =
             "none";
 
 
-        document.body.appendChild(
-            link
-        );
+        document.body.appendChild(link);
 
 
         link.click();
@@ -1450,13 +1166,9 @@ Generated by AI Resume Analyzer
         setTimeout(
             function () {
 
-                document.body.removeChild(
-                    link
-                );
+                document.body.removeChild(link);
 
-                window.URL.revokeObjectURL(
-                    url
-                );
+                window.URL.revokeObjectURL(url);
 
             },
             1000
