@@ -861,6 +861,40 @@ function analyzeResume() {
     results.classList.remove(
         "hidden"
     );
+    
+    // ========================================
+// RESUME QUALITY CHECK STATUS
+// ========================================
+
+contactCheck.textContent =
+    sections.contact
+        ? "✓ Present"
+        : "✗ Missing";
+
+summaryCheck.textContent =
+    sections.summary
+        ? "✓ Present"
+        : "✗ Missing";
+
+skillsCheck.textContent =
+    sections.skills
+        ? "✓ Present"
+        : "✗ Missing";
+
+projectsCheck.textContent =
+    sections.projects
+        ? "✓ Present"
+        : "✗ Missing";
+
+experienceCheck.textContent =
+    sections.experience
+        ? "✓ Present"
+        : "✗ Missing";
+
+educationCheck.textContent =
+    sections.education
+        ? "✓ Present"
+        : "✗ Missing";
 
 
     results.scrollIntoView({
