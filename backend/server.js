@@ -70,6 +70,21 @@ const server = http.createServer(
             "Content-Type"
         );
 
+                if (
+            req.method === "OPTIONS"
+        ) {
+
+            res.setHeader(
+                "Access-Control-Allow-Methods",
+                "GET, POST, OPTIONS"
+            );
+
+            res.statusCode = 204;
+
+            res.end();
+
+            return;
+                }
         if (
             req.method === "GET" &&
             req.url === "/"
