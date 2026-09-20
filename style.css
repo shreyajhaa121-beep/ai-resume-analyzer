@@ -528,3 +528,55 @@ footer {
         text-align: center;
     }
 }
+/* ============================================
+   ATS SCORE BREAKDOWN
+   ============================================ */
+
+.score-breakdown {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.score-breakdown h3 {
+    margin: 0 0 18px;
+    font-size: 18px;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.breakdown-item:last-child {
+    border-bottom: none;
+}
+
+.breakdown-item span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.breakdown-item strong {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+
+    .score-breakdown {
+        margin-top: 20px;
+        padding: 16px;
+    }
+
+    .breakdown-item {
+        padding: 10px 0;
+    }
+
+}
