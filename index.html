@@ -172,79 +172,108 @@
 
 
             <!-- ATS Score -->
-            <div class="score-card">
+<div class="score-card">
 
-                <div class="score-circle">
+    <div class="score-circle">
 
-                    <span id="score">
-                        0
-                    </span>
+        <span id="score">
+            0
+        </span>
 
-                    <small>
-                        / 100
-                    </small>
+        <small>
+            / 100
+        </small>
 
-                </div>
-
-
-                <div>
-
-                    <h3>
-                        ATS Compatibility
-                    </h3>
-
-                    <p id="scoreMessage">
-                        Your score will appear here.
-                    </p>
-
-                </div>
-
-            </div>
+    </div>
 
 
-            <!-- Keywords -->
-            <div class="result-grid">
+    <!-- ATS Score Breakdown -->
+    <div id="scoreBreakdown" class="score-breakdown">
+
+        <h3>
+            ATS Score Breakdown
+        </h3>
+
+        <div class="breakdown-item">
+            <span>Technical Skills</span>
+            <strong id="skillsScore">0/60</strong>
+        </div>
+
+        <div class="breakdown-item">
+            <span>Job Keywords</span>
+            <strong id="keywordsScore">0/25</strong>
+        </div>
+
+        <div class="breakdown-item">
+            <span>Resume Sections</span>
+            <strong id="sectionsScore">0/10</strong>
+        </div>
+
+        <div class="breakdown-item">
+            <span>Overall ATS Score</span>
+            <strong id="overallScore">0/100</strong>
+        </div>
+
+    </div>
 
 
-                <div class="result-card">
+    <div>
 
-                    <h3>
-                        Matched Keywords
-                    </h3>
+        <h3>
+            ATS Compatibility
+        </h3>
 
-                    <div id="matchedKeywords"
-                         class="keyword-list">
-                    </div>
+        <p id="scoreMessage">
+            Your score will appear here.
+        </p>
 
-                </div>
+    </div>
 
-
-                <div class="result-card">
-
-                    <h3>
-                        Missing Keywords
-                    </h3>
-
-                    <div id="missingKeywords"
-                         class="keyword-list">
-                    </div>
-
-                </div>
-
-            </div>
+</div>
 
 
-            <!-- Suggestions -->
-            <div class="suggestions-card">
+<!-- Keywords -->
+<div class="result-grid">
 
-                <h3>
-                    Resume Suggestions
-                </h3>
+    <div class="result-card">
 
-                <ul id="suggestions">
-                </ul>
+        <h3>
+            Matched Keywords
+        </h3>
 
-            </div>
+        <div id="matchedKeywords"
+             class="keyword-list">
+        </div>
+
+    </div>
+
+
+    <div class="result-card">
+
+        <h3>
+            Missing Keywords
+        </h3>
+
+        <div id="missingKeywords"
+             class="keyword-list">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Suggestions -->
+<div class="suggestions-card">
+
+    <h3>
+        Resume Suggestions
+    </h3>
+
+    <ul id="suggestions">
+    </ul>
+
+</div>
 
 
             <!-- Bullet Improvement -->
