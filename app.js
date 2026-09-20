@@ -166,23 +166,27 @@ resumeFile.addEventListener(
             return;
         }
 
-        fileName.textContent =
-            file.name;
+        fileName.textContent = file.name;
 
 
-        // TXT files
+        // ========================================
+        // TXT FILES
+        // ========================================
+
         if (
             file.type === "text/plain" ||
             file.name.toLowerCase().endsWith(".txt")
         ) {
 
-            resumeText =
-                await file.text();
+            resumeText = await file.text();
 
         }
 
 
-        // PDF files
+        // ========================================
+        // PDF FILES
+        // ========================================
+
         else if (
             file.type === "application/pdf" ||
             file.name.toLowerCase().endsWith(".pdf")
@@ -192,6 +196,9 @@ resumeFile.addEventListener(
 
                 resumeText =
                     await extractPdfText(file);
+
+                // If PDF has no selectable text,
+                // try OCR on the PDF pages later.
 
                 if (!resumeText.trim()) {
 
@@ -210,7 +217,7 @@ resumeFile.addEventListener(
                 resumeText = "";
 
                 alert(
-                    "Could not read this PDF. Please try a text-based PDF."
+                    "This PDF does not contain selectable text yet. OCR support for scanned PDFs will be connected in the next step."
                 );
 
             }
@@ -218,13 +225,58 @@ resumeFile.addEventListener(
         }
 
 
-        // Unsupported file
+        // ========================================
+        // IMAGE FILES — OCR
+        // ========================================
+
+        else if (
+            file.type === "image/jpeg" ||
+            file.type === "image/png" ||
+            file.name.toLowerCase().endsWith(".jpg") ||
+            file.name.toLowerCase().endsWith(".jpeg") ||
+            file.name.toLowerCase().endsWith(".png")
+        ) {
+
+            try {
+
+                resumeText =
+                    await extractImageText(file);
+
+                if (!resumeText.trim()) {
+
+                    throw new Error(
+                        "No text found in image."
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                resumeText = "";
+
+                alert(
+                    "Could not extract text from this image."
+                );
+
+            }
+
+        }
+
+
+        // ========================================
+        // UNSUPPORTED FILE
+        // ========================================
+
         else {
 
             resumeText = "";
 
             alert(
-                "Please upload a TXT or PDF resume."
+                "Please upload a TXT, PDF, JPG, JPEG, or PNG resume."
             );
 
         }
