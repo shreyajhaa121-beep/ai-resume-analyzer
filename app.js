@@ -529,6 +529,16 @@ function displayKeywords(
 
  }
 
+
+// ============================================
+// 10. ANALYZE RESUME
+// ============================================
+
+function analyzeResume() {
+    
+    const sections =
+    checkResumeSections();
+
 // ----------------------------------------
 // Resume Quality Check
 // ----------------------------------------
@@ -552,11 +562,11 @@ educationCheck.textContent =
     sections.education ? "✓ Present" : "✗ Missing";
 
 
-// ============================================
-// 10. ANALYZE RESUME
-// ============================================
-
-function analyzeResume() {
+// Score calculation
+if (sections.summary) {
+    sectionScore += 3;
+}
+    
 
     const jobText =
         jobDescription.value.trim();
