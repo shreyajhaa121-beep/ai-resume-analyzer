@@ -274,7 +274,6 @@ function generateAIFeedback(
             "</p>";
 
     } else {
-
         feedback +=
             "<p>✓ No major technical skill gaps detected.</p>";
     }
