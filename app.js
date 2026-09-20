@@ -44,6 +44,32 @@ async function extractPdfText(file) {
     return text;
 }
 
+async function extractImageText(file) {
+
+    try {
+
+        const result = await Tesseract.recognize(
+            file,
+            "eng",
+            {
+                logger: info => {
+                    console.log(info);
+                }
+            }
+        );
+
+        return result.data.text.trim();
+
+    } catch (error) {
+
+        console.error("OCR error:", error);
+
+        throw new Error(
+            "Unable to extract text from this image."
+        );
+    }
+}
+
 
 // ============================================
 // 1. GET HTML ELEMENTS
