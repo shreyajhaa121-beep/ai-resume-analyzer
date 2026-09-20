@@ -98,6 +98,9 @@ const improveBulletBtn =
 const improvedBullet =
     document.getElementById("improvedBullet");
 
+const downloadReportBtn =
+    document.getElementById("downloadReportBtn");
+
 
 // Store resume text
 let resumeText = "";
@@ -997,6 +1000,7 @@ function improveBulletRuleBased(
                     oldPhrase,
                     "i"
                 );
+            
 
 
             result =
@@ -1011,3 +1015,14 @@ function improveBulletRuleBased(
     return result;
 
                     }
+
+downloadReportBtn.addEventListener(
+    "click",
+    function () {
+
+        alert(
+            "ATS report download feature is being prepared."
+        );
+
+    }
+);
