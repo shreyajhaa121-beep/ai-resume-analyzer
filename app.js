@@ -544,6 +544,28 @@ function checkResumeSections() {
 
 }
 
+function updateQualityCheck(sections) {
+
+    contactCheck.textContent =
+        sections.contact ? "✓ Present" : "✗ Missing";
+
+    summaryCheck.textContent =
+        sections.summary ? "✓ Present" : "✗ Missing";
+
+    skillsCheck.textContent =
+        sections.skills ? "✓ Present" : "✗ Missing";
+
+    projectsCheck.textContent =
+        sections.projects ? "✓ Present" : "✗ Missing";
+
+    experienceCheck.textContent =
+        sections.experience ? "✓ Present" : "✗ Missing";
+
+    educationCheck.textContent =
+        sections.education ? "✓ Present" : "✗ Missing";
+
+}
+
 
 // ============================================
 // 10. ANALYZE RESUME
@@ -686,6 +708,7 @@ function analyzeResume() {
 
     const sections =
         checkResumeSections();
+    updateQualityCheck(sections);
 
 
     if (sections.summary) {
