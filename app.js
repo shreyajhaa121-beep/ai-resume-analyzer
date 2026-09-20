@@ -1332,6 +1332,41 @@ document.getElementById("softSkillsScore").textContent =
 aiFeedback.innerHTML =
     aiFeedbackText;
 
+    const jobMatch =
+    generateJobMatch(
+        resumeText,
+        jobText
+    );
+
+jobMatchResult.innerHTML =
+    `
+    <h4>Job Match Score</h4>
+
+    <p>
+        <strong>${jobMatch.percentage}%</strong>
+        alignment with this job description.
+    </p>
+
+    <h4>Matched Skills</h4>
+
+    <p>
+        ${
+            jobMatch.matched.length > 0
+                ? jobMatch.matched.join(", ")
+                : "No matching skills detected."
+        }
+    </p>
+
+    <h4>Missing Skills</h4>
+
+    <p>
+        ${
+            jobMatch.missing.length > 0
+                ? jobMatch.missing.join(", ")
+                : "No major missing skills detected."
+        }
+    </p>
+    `;
 
     // Show results
     results.classList.remove(
