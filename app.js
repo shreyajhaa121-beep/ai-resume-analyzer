@@ -1242,6 +1242,15 @@ document.getElementById("softSkillsScore").textContent =
         missingGeneral,
         sections
     );
+    const aiFeedbackText =
+    generateAIFeedback(
+        percentage,
+        missingSkills,
+        missingGeneral
+    );
+
+aiFeedback.innerHTML =
+    aiFeedbackText;
 
 
     // Show results
