@@ -1,5 +1,7 @@
 const http = require("http");
 
+const cors = require("cors");
+
 const OpenAI =
     require("openai");
 
@@ -9,6 +11,10 @@ const client =
     });
 
 const PORT = process.env.PORT || 3000;
+
+const corsOptions = {
+    origin: "*"
+};
 
 async function analyzeWithAI(
     resume,
