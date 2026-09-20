@@ -10,6 +10,43 @@ const client =
 
 const PORT = process.env.PORT || 3000;
 
+async function analyzeWithAI(
+    resume,
+    jobDescription
+) {
+
+    const response =
+        await client.responses.create({
+
+            model: "gpt-5-mini",
+
+            input: [
+                {
+                    role: "system",
+                    content:
+                        "You are a resume analysis assistant. Analyze the resume against the job description and return concise, factual feedback."
+                },
+                {
+                    role: "user",
+                    content:
+                        `Resume:
+${resume}
+
+Job Description:
+${jobDescription}
+
+Return:
+1. Matching skills
+2. Missing skills
+3. Resume improvement suggestions
+4. Overall alignment summary`
+                }
+            ]
+        });
+
+    return response.output_text;
+}
+
 const server = http.createServer(
     (req, res) => {
 
