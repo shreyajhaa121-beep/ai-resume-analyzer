@@ -1,5 +1,13 @@
 const http = require("http");
 
+const OpenAI =
+    require("openai");
+
+const client =
+    new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY
+    });
+
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(
