@@ -546,23 +546,35 @@ function checkResumeSections() {
 
 function updateQualityCheck(sections) {
 
-    contactCheck.textContent =
-        sections.contact ? "✓ Present" : "✗ Missing";
+    if (contactCheck) {
+        contactCheck.textContent =
+            sections.contact ? "✓ Present" : "✗ Missing";
+    }
 
-    summaryCheck.textContent =
-        sections.summary ? "✓ Present" : "✗ Missing";
+    if (summaryCheck) {
+        summaryCheck.textContent =
+            sections.summary ? "✓ Present" : "✗ Missing";
+    }
 
-    skillsCheck.textContent =
-        sections.skills ? "✓ Present" : "✗ Missing";
+    if (skillsCheck) {
+        skillsCheck.textContent =
+            sections.skills ? "✓ Present" : "✗ Missing";
+    }
 
-    projectsCheck.textContent =
-        sections.projects ? "✓ Present" : "✗ Missing";
+    if (projectsCheck) {
+        projectsCheck.textContent =
+            sections.projects ? "✓ Present" : "✗ Missing";
+    }
 
-    experienceCheck.textContent =
-        sections.experience ? "✓ Present" : "✗ Missing";
+    if (experienceCheck) {
+        experienceCheck.textContent =
+            sections.experience ? "✓ Present" : "✗ Missing";
+    }
 
-    educationCheck.textContent =
-        sections.education ? "✓ Present" : "✗ Missing";
+    if (educationCheck) {
+        educationCheck.textContent =
+            sections.education ? "✓ Present" : "✗ Missing";
+    }
 
 }
 
@@ -708,6 +720,7 @@ function analyzeResume() {
 
     const sections =
         checkResumeSections();
+    
     updateQualityCheck(sections);
 
 
