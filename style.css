@@ -633,3 +633,93 @@ footer {
     }
 
 }
+
+/* ============================================
+   MOBILE UI POLISH
+   ============================================ */
+
+@media (max-width: 600px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 92%;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 30px;
+        line-height: 1.2;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    .hero {
+        padding: 50px 0 35px;
+    }
+
+    .hero p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .analyzer {
+        padding: 25px 0;
+    }
+
+    textarea {
+        min-height: 180px;
+        font-size: 14px;
+    }
+
+    input[type="file"] {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    button {
+        width: 100%;
+        padding: 13px 16px;
+    }
+
+    .results {
+        margin-top: 25px;
+    }
+
+    .score-breakdown,
+    .quality-card {
+        padding: 16px;
+    }
+
+    .breakdown-item,
+    .quality-item {
+        gap: 12px;
+    }
+
+    .breakdown-item span,
+    .quality-item span {
+        font-size: 13px;
+    }
+
+    .breakdown-item strong,
+    .quality-item strong {
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .report-download {
+        margin-top: 18px;
+    }
+
+    .report-download button {
+        width: 100%;
+    }
+}
