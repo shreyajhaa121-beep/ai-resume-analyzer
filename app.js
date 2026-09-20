@@ -312,6 +312,50 @@ function generateAIFeedback(
     return feedback;
 }
 
+function generateJobMatch(
+    resumeText,
+    jobText
+) {
+
+    const resumeLower =
+        normalizeText(resumeText);
+
+    const jobSkills =
+        extractSkills(jobText);
+
+    const matched = [];
+    const missing = [];
+
+    jobSkills.forEach(skill => {
+
+        if (containsTerm(resumeLower, skill)) {
+
+            matched.push(skill);
+
+        } else {
+
+            missing.push(skill);
+        }
+
+    });
+
+    let matchPercentage = 0;
+
+    if (jobSkills.length > 0) {
+
+        matchPercentage =
+            Math.round(
+                (matched.length / jobSkills.length) * 100
+            );
+    }
+
+    return {
+        percentage: matchPercentage,
+        matched: matched,
+        missing: missing
+    };
+}
+
 // ============================================
 // 2. RESUME FILE SELECTION
 // ============================================
