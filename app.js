@@ -240,6 +240,9 @@ function generateAIFeedback(
 
     let feedback = "";
 
+    // Overall assessment
+    feedback += "<h4>Overall Assessment</h4>";
+
     if (percentage >= 80) {
 
         feedback +=
@@ -256,25 +259,55 @@ function generateAIFeedback(
             "<p>⚠ Your resume needs improvement to better match this job description.</p>";
     }
 
+
+    // Technical skills
+    feedback += "<h4>Technical Skills</h4>";
+
     if (missingSkills.length > 0) {
 
         feedback +=
-            "<p><strong>Technical skills to consider:</strong> " +
+            "<p>Consider adding relevant skills such as: " +
             missingSkills.slice(0, 5).join(", ") +
             "</p>";
+
+    } else {
+
+        feedback +=
+            "<p>✓ No major technical skill gaps detected.</p>";
     }
+
+
+    // Job keywords
+    feedback += "<h4>Job Keywords</h4>";
 
     if (missingGeneral.length > 0) {
 
         feedback +=
-            "<p><strong>Keywords to consider:</strong> " +
+            "<p>Keywords that may improve job-description alignment: " +
             missingGeneral.slice(0, 5).join(", ") +
             "</p>";
+
+    } else {
+
+        feedback +=
+            "<p>✓ Good keyword alignment with the job description.</p>";
     }
+
+
+    // Improvement suggestions
+    feedback += "<h4>Improvement Suggestions</h4>";
+
+    feedback +=
+        "<ul>" +
+        "<li>Use clear and measurable project descriptions.</li>" +
+        "<li>Highlight technologies used in your projects.</li>" +
+        "<li>Use action verbs such as Developed, Implemented, Designed, and Built.</li>" +
+        "<li>Keep your resume concise and easy to scan.</li>" +
+        "</ul>";
+
 
     return feedback;
 }
-
 
 // ============================================
 // 2. RESUME FILE SELECTION
