@@ -103,6 +103,24 @@ const improvedBullet =
 const downloadReportBtn =
     document.getElementById("downloadReportBtn");
 
+const contactCheck =
+    document.getElementById("contactCheck");
+
+const summaryCheck =
+    document.getElementById("summaryCheck");
+
+const skillsCheck =
+    document.getElementById("skillsCheck");
+
+const projectsCheck =
+    document.getElementById("projectsCheck");
+
+const experienceCheck =
+    document.getElementById("experienceCheck");
+
+const educationCheck =
+    document.getElementById("educationCheck");
+
 
 // Store resume text
 let resumeText = "";
