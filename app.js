@@ -266,13 +266,32 @@ function containsTerm(text, term) {
     const normalizedTerm =
         normalizeText(term);
 
+    // Exact match
+    if (
+        normalizedText.includes(
+            normalizedTerm
+        )
+    ) {
+        return true;
+    }
 
-    return normalizedText.includes(
-        normalizedTerm
+    // Simple word variations
+    const variations = [
+        normalizedTerm,
+        normalizedTerm + "s",
+        normalizedTerm + "es",
+        normalizedTerm + "ed",
+        normalizedTerm + "ing"
+    ];
+
+    return variations.some(
+        variation =>
+            normalizedText.includes(
+                variation
+            )
     );
 
 }
-
 
 // ============================================
 // 6. EXTRACT IMPORTANT SKILLS
