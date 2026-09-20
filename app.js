@@ -1665,6 +1665,34 @@ function improveBulletRuleBased(
                 " with a focus on performance and usability."
             );
     }
+    
+        // Detect technical skills in the bullet
+    const bulletSkills = [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Python",
+        "Java",
+        "SQL",
+        "Git",
+        "GitHub",
+        "React",
+        "Node.js",
+        "LocalStorage"
+    ];
+
+    const detectedSkills =
+        bulletSkills.filter(skill =>
+            result.toLowerCase().includes(
+                skill.toLowerCase()
+            )
+        );
+
+    // Store detected skills for future AI feedback
+    console.log(
+        "Detected Technical Skills:",
+        detectedSkills
+    );
 
     return result;
 }
