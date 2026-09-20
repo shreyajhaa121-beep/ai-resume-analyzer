@@ -207,6 +207,9 @@ const improvedBullet =
 const aiFeedback =
     document.getElementById("aiFeedback");
 
+const jobMatchResult =
+    document.getElementById("jobMatchResult");
+
 const downloadReportBtn =
     document.getElementById("downloadReportBtn");
 
