@@ -909,6 +909,28 @@ console.log(
     categoryScores
 );
 
+    // ========================================
+// DISPLAY ATS CATEGORY SCORES
+// ========================================
+
+document.getElementById("programmingScore").textContent =
+    categoryScores.programming + "%";
+
+document.getElementById("webScore").textContent =
+    categoryScores.web + "%";
+
+document.getElementById("databaseScore").textContent =
+    categoryScores.database + "%";
+
+document.getElementById("toolsScore").textContent =
+    categoryScores.tools + "%";
+
+document.getElementById("conceptsScore").textContent =
+    categoryScores.concepts + "%";
+
+document.getElementById("softSkillsScore").textContent =
+    categoryScores.softSkills + "%";
+
 
     // ----------------------------------------
     // Extract skills
