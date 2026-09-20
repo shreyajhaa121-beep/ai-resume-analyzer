@@ -580,3 +580,56 @@ footer {
     }
 
 }
+
+/* ============================================
+   RESUME QUALITY CHECK
+   ============================================ */
+
+.quality-card {
+    margin-top: 25px;
+    padding: 22px;
+    border-radius: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.quality-card h3 {
+    margin: 0 0 18px;
+    font-size: 18px;
+}
+
+.quality-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.quality-item:last-child {
+    border-bottom: none;
+}
+
+.quality-item span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.quality-item strong {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+
+    .quality-card {
+        padding: 16px;
+    }
+
+    .quality-item {
+        padding: 10px 0;
+    }
+
+}
