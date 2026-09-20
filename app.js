@@ -903,6 +903,8 @@ function analyzeResume() {
 
 const categoryScores =
     calculateCategoryScores(resumeText);
+    
+    console.log("CATEGORY SCORES:", categoryScores);
 
 console.log(
     "ATS Category Scores:",
