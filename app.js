@@ -204,6 +204,9 @@ const improveBulletBtn =
 const improvedBullet =
     document.getElementById("improvedBullet");
 
+const aiFeedback =
+    document.getElementById("aiFeedback");
+
 const downloadReportBtn =
     document.getElementById("downloadReportBtn");
 
