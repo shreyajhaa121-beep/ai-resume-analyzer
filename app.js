@@ -70,6 +70,84 @@ async function extractImageText(file) {
     }
 }
 
+async function extractScannedPdfText(file) {
+
+    try {
+
+        const arrayBuffer =
+            await file.arrayBuffer();
+
+        const pdf =
+            await pdfjsLib.getDocument({
+                data: new Uint8Array(arrayBuffer)
+            }).promise;
+
+        let fullText = "";
+
+        for (
+            let pageNumber = 1;
+            pageNumber <= pdf.numPages;
+            pageNumber++
+        ) {
+
+            const page =
+                await pdf.getPage(pageNumber);
+
+            const viewport =
+                page.getViewport({
+                    scale: 2
+                });
+
+            const canvas =
+                document.createElement("canvas");
+
+            const context =
+                canvas.getContext("2d");
+
+            canvas.width =
+                viewport.width;
+
+            canvas.height =
+                viewport.height;
+
+            await page.render({
+                canvasContext: context,
+                viewport: viewport
+            }).promise;
+
+            const result =
+                await Tesseract.recognize(
+                    canvas,
+                    "eng",
+                    {
+                        logger: info => {
+                            console.log(
+                                `OCR Page ${pageNumber}:`,
+                                info
+                            );
+                        }
+                    }
+                );
+
+            fullText +=
+                result.data.text + "\n";
+        }
+
+        return fullText.trim();
+
+    } catch (error) {
+
+        console.error(
+            "Scanned PDF OCR error:",
+            error
+        );
+
+        throw new Error(
+            "Unable to read scanned PDF."
+        );
+    }
+}
+
 
 // ============================================
 // 1. GET HTML ELEMENTS
