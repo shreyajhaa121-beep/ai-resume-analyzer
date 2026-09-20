@@ -927,6 +927,13 @@ console.log(
     "ATS Category Average:",
     Math.round(categoryAverage) + "%"
 );
+    const categoryAverageDisplay =
+    document.getElementById("categoryAverageDisplay");
+
+if (categoryAverageDisplay) {
+    categoryAverageDisplay.textContent =
+        Math.round(categoryAverage) + "%";
+}
 
     // ========================================
 // DISPLAY ATS CATEGORY SCORES
