@@ -910,6 +910,25 @@ console.log(
 );
 
     // ========================================
+// ADVANCED CATEGORY AVERAGE
+// ========================================
+
+const categoryAverage =
+    (
+        categoryScores.programming +
+        categoryScores.web +
+        categoryScores.database +
+        categoryScores.tools +
+        categoryScores.concepts +
+        categoryScores.softSkills
+    ) / 6;
+
+console.log(
+    "ATS Category Average:",
+    Math.round(categoryAverage) + "%"
+);
+
+    // ========================================
 // DISPLAY ATS CATEGORY SCORES
 // ========================================
 
