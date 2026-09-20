@@ -723,3 +723,33 @@ footer {
         width: 100%;
     }
 }
+
+/* ============================================
+   FINAL UI POLISH
+   ============================================ */
+
+button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.score-breakdown,
+.quality-card {
+    transition: box-shadow 0.2s ease;
+}
+
+.score-breakdown:hover,
+.quality-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.quality-item strong {
+    letter-spacing: 0.2px;
+}
+
+.report-download {
+    text-align: center;
+}
