@@ -232,6 +232,49 @@ const educationCheck =
 // Store resume text
 let resumeText = "";
 
+function generateAIFeedback(
+    percentage,
+    missingSkills,
+    missingGeneral
+) {
+
+    let feedback = "";
+
+    if (percentage >= 80) {
+
+        feedback +=
+            "<p>✓ Your resume has strong alignment with the job description.</p>";
+
+    } else if (percentage >= 60) {
+
+        feedback +=
+            "<p>⚠ Your resume has good alignment, but some areas can be improved.</p>";
+
+    } else {
+
+        feedback +=
+            "<p>⚠ Your resume needs improvement to better match this job description.</p>";
+    }
+
+    if (missingSkills.length > 0) {
+
+        feedback +=
+            "<p><strong>Technical skills to consider:</strong> " +
+            missingSkills.slice(0, 5).join(", ") +
+            "</p>";
+    }
+
+    if (missingGeneral.length > 0) {
+
+        feedback +=
+            "<p><strong>Keywords to consider:</strong> " +
+            missingGeneral.slice(0, 5).join(", ") +
+            "</p>";
+    }
+
+    return feedback;
+}
+
 
 // ============================================
 // 2. RESUME FILE SELECTION
