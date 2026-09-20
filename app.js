@@ -446,6 +446,47 @@ const atsSkillCategories = {
     ]
 };
 
+// ============================================
+// ATS CATEGORY SCORE CALCULATOR
+// ============================================
+
+function calculateCategoryScores(resumeText) {
+
+    const scores = {};
+
+    const normalizedResume =
+        normalizeText(resumeText);
+
+    for (const category in atsSkillCategories) {
+
+        const skills =
+            atsSkillCategories[category];
+
+        let matched = 0;
+
+        skills.forEach(skill => {
+
+            if (
+                containsTerm(
+                    normalizedResume,
+                    skill
+                )
+            ) {
+                matched++;
+            }
+
+        });
+
+        scores[category] =
+            skills.length > 0
+                ? Math.round(
+                    (matched / skills.length) * 100
+                )
+                : 0;
+    }
+
+    return scores;
+}
 
 // ============================================
 // 3. KNOWN TECHNICAL SKILLS
