@@ -1587,7 +1587,6 @@ function improveBulletRuleBased(
     let result =
         bullet.trim();
 
-
     const replacements = {
 
         "worked on":
@@ -1616,9 +1615,7 @@ function improveBulletRuleBased(
 
         "created":
             "Developed"
-
     };
-
 
     Object.keys(replacements)
         .forEach(oldPhrase => {
@@ -1629,7 +1626,6 @@ function improveBulletRuleBased(
                     "i"
                 );
 
-
             result =
                 result.replace(
                     regex,
@@ -1638,9 +1634,27 @@ function improveBulletRuleBased(
 
         });
 
+    // Capitalize first letter
+    result =
+        result.charAt(0).toUpperCase() +
+        result.slice(1);
+
+    // Remove extra spaces
+    result =
+        result.replace(
+            /\s+/g,
+            " "
+        ).trim();
+
+    // Add period
+    if (
+        !result.endsWith(".")
+    ) {
+
+        result += ".";
+    }
 
     return result;
-
 }
 
 
