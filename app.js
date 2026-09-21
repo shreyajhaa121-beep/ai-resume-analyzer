@@ -991,7 +991,7 @@ function updateQualityCheck(sections) {
 // 10. ANALYZE RESUME
 // ============================================
 
-function analyzeResume() {
+async function analyzeResume() {
 
     const jobText =
         jobDescription.value.trim();
@@ -1368,6 +1368,57 @@ jobMatchResult.innerHTML =
         }
     </p>
     `;
+
+// ========================================
+// REAL AI BACKEND ANALYSIS
+// ========================================
+
+try {
+
+    const response = await fetch(
+        `${BACKEND_URL}/analyze`,
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                resume: resumeText,
+                jobDescription: jobText
+            })
+        }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            data.error || "AI analysis failed."
+        );
+    }
+
+    aiFeedback.innerHTML = "";
+
+    const aiResult = document.createElement("p");
+
+    aiResult.textContent =
+        data.result || "No AI feedback received.";
+
+    aiFeedback.appendChild(aiResult);
+
+}
+catch (error) {
+
+    console.error(
+        "Backend AI error:",
+        error
+    );
+
+    aiFeedback.innerHTML +=
+        "<p>AI backend analysis is temporarily unavailable. Local resume analysis is still available.</p>";
+}
 
     // Show results
     results.classList.remove(
