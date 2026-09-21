@@ -159,6 +159,8 @@ const resumeFile =
 const fileName =
     document.getElementById("fileName");
 
+const BACKEND_URL = "https://ai-resume-analyzer-hjro.onrender.com";
+
 const analyzeBtn =
     document.getElementById("analyzeBtn");
 
