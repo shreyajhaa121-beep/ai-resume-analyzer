@@ -1372,6 +1372,8 @@ jobMatchResult.innerHTML =
 // ========================================
 // REAL AI BACKEND ANALYSIS
 // ========================================
+    analyzeBtn.disabled = true;
+analyzeBtn.textContent = "Analyzing...";
 
 try {
 
@@ -1416,10 +1418,14 @@ catch (error) {
         error
     );
 
-    aiFeedback.innerHTML +=
-        "<p>AI backend analysis is temporarily unavailable. Local resume analysis is still available.</p>";
+     aiFeedback.innerHTML +=
+    "<p>AI backend analysis is temporarily unavailable. Local resume analysis is still available.</p>" +
+    "<p>Please check the backend logs.</p>";
 }
 
+    analyzeBtn.disabled = false;
+analyzeBtn.textContent = "Analyze Resume";
+    
     // Show results
     results.classList.remove(
         "hidden"
