@@ -85,20 +85,43 @@ const server = http.createServer(
 
             return;
                 }
-        if (
-            req.method === "GET" &&
-            req.url === "/"
-        ) {
 
-            res.end(
-                JSON.stringify({
-                    status: "Backend is running",
-                    app: "AI Resume Analyzer"
-                })
-            );
+        if (req.method === "GET" && req.url === "/test-ai") {
+    try {
+        const response = await client.responses.create({
+            model: "gpt-5-mini",
+            input: "Reply with exactly: AI backend working"
+        });
 
-            return;
-        }
+        res.end(JSON.stringify({
+            success: true,
+            result: response.output_text
+        }));
+    } catch (error) {
+        console.error("Test AI error:", error);
+
+        res.statusCode = 500;
+
+        res.end(JSON.stringify({
+            success: false,
+            error: error.message
+        }));
+    }
+
+    return;
+}
+
+if (req.method === "GET" && req.url === "/") {
+    res.end(
+        JSON.stringify({
+            status: "Backend is running",
+            app: "AI Resume Analyzer"
+        })
+    );
+
+    return;
+}
+        
                 if (
             req.method === "POST" &&
             req.url === "/analyze"
