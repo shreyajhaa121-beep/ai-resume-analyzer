@@ -54,7 +54,7 @@ Return:
 }
 
 const server = http.createServer(
-    (req, res) => {
+    async (req, res) => {
 
         res.setHeader(
             "Content-Type",
